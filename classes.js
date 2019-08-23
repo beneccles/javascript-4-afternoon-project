@@ -98,6 +98,45 @@ class Manager extends Employee {
 */
 
 //Code Here
+class ProgressiveManager extends Manager {
+  constructor (first_name, last_name, email, age, reports = [], title = "Not a manager", bonus = 0){
+    super(first_name, last_name, email, age, reports)
+    this.title = title;
+    this.bonus = bonus;
+  }
+  
+  hire(employee) {
+    super.hire();
+    if (this.reports.length > 100)
+    {
+      this.title = "Bestest Manager";
+    }
+    else if (this.reports.length <= 100 && this.reports.length >= 51)
+    {
+      this.title = "Manager Plus";
+    }
+    else if (this.reports.length <= 50 && this.reports.length >= 11)
+    {
+      this.title = "Manager";
+    }
+    else if (this.reports.length <= 10 && this.reports.length >= 4)
+    {
+      this.title = "Mostly Manager";
+    }
+    else if (this.reports.length <= 3 && this.reports.length >= 1)
+    {
+      this.title = "Barely Manager";
+    }
+  }
+
+  fire(){
+    super.fire();
+    this.bonus += 100;
+  }
+
+ 
+
+}
 
 
 
@@ -125,5 +164,30 @@ class Manager extends Employee {
 */
 
 //Code Here
+class Machine {
+  constructor (widgets_made_count = 0, wear_and_tear_count = 0, needs_reboot = false){
+    this.widgets_made_count = widgets_made_count;
+    this.wear_and_tear_count = wear_and_tear_count;
+    this.needs_reboot = needs_reboot;
+  }
 
+  makeWidgets(number){
+    console.log(number)
+    this.widgets_made_count += number;
+    this.wear_and_tear_count += number / 50;
+  }
+
+  fixMachine(){
+    this.needs_reboot = true;
+  }
+
+  reboot() {
+
+    return () => {
+      this.wear_and_tear_count -= 10;
+      this.needs_reboot = false;
+    }
+
+  }
+}
 
